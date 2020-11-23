@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should Navigation component render correctly 1`] = `
+Array [
+  <ul>
+    <li>
+      <div
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        role="button"
+        tabIndex={0}
+      >
+        default
+      </div>
+    </li>
+    <li>
+      <div
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        role="button"
+        tabIndex={0}
+      >
+        caught
+      </div>
+    </li>
+  </ul>,
+  ",",
+]
+`;

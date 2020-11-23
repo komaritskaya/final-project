@@ -1,0 +1,14 @@
+{
+  "name": "data",
+  "version": "1.0.0",
+  "description": "DB for pokedex app",
+  "main": "index.js",
+  "scripts": {
+    "json:server": "json-server --watch db.json"
+  },
+  "author": "Nadezhda Komaritskaia",
+  "license": "ISC",
+  "dependencies": {
+    "json-server": "0.16.3"
+  }
+}

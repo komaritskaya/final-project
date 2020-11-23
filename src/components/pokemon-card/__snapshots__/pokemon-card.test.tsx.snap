@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should Pokemon Card component render correctly 1`] = `
+<div>
+  <a
+    href="/1"
+    onClick={[Function]}
+  >
+    bulbasaur
+  </a>
+</div>
+`;

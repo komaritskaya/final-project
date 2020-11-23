@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should ShowMoreBtn component render correctly 1`] = `
+Array [
+  <div>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      Show more
+    </button>
+  </div>,
+  ",",
+]
+`;
