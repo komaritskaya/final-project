@@ -4,13 +4,14 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import renderer from 'react-test-renderer';
 import MainPage from './main-page';
-import { pokemons } from '../../mocks/pokemons';
+import { pokemons, userPokemons } from '../../mocks/pokemons';
 
 const mockStore = configureStore([]);
 
 it('Should MainPage component render correctly', () => {
   const store = mockStore({
     pokemons,
+    userPokemons,
     shownPokemonsCount: 1,
   });
 

@@ -26,6 +26,6 @@ export interface RootState {
 }
 
 export interface Action {
-  type: 'SET_FILTER' | 'ADD_SHOWN_POKEMONS' | 'RESET_SHOWN_POKEMONS' | 'ERROR';
+  type: 'SET_FILTER' | 'ADD_SHOWN_POKEMONS' | 'RESET_SHOWN_POKEMONS' | 'CATCH_POKEMON' | 'ERROR';
   payload?: unknown;
 }

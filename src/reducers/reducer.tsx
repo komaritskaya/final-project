@@ -21,6 +21,10 @@ const ActionCreator = {
   resetShownPokemons: (): Action => ({
     type: 'RESET_SHOWN_POKEMONS',
   }),
+  catchPokemon: (id: number, catchDate: Date): Action => ({
+    type: 'CATCH_POKEMON',
+    payload: { id, catchDate },
+  }),
 
 };
 
@@ -34,6 +38,9 @@ const reducer = (state = initialState, action: Action) => {
       return { ...state, shownPokemonsCount };
     case 'RESET_SHOWN_POKEMONS':
       return { ...state, shownPokemonsCount: SHOWN_POKEMONS_COUNT };
+    case 'CATCH_POKEMON':
+      const userPokemonsNew = [...state.userPokemons, action.payload];
+      return { ...state, userPokemons: userPokemonsNew };
     default:
       return state;
   }

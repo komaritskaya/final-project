@@ -8,5 +8,12 @@ exports[`Should Pokemon Card component render correctly 1`] = `
   >
     bulbasaur
   </a>
+  <button
+    onClick={[Function]}
+    type="button"
+  >
+    catch
+  </button>
+  <hr />
 </div>
 `;

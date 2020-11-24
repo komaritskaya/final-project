@@ -9,6 +9,13 @@ exports[`Should Pokemons List component render correctly 1`] = `
     >
       bulbasaur
     </a>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      catch
+    </button>
+    <hr />
   </div>
   <div>
     <a
@@ -17,6 +24,13 @@ exports[`Should Pokemons List component render correctly 1`] = `
     >
       ivysaur
     </a>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      catch
+    </button>
+    <hr />
   </div>
   <div>
     <a
@@ -25,6 +39,13 @@ exports[`Should Pokemons List component render correctly 1`] = `
     >
       venusaur
     </a>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      catch
+    </button>
+    <hr />
   </div>
   <div>
     <a
@@ -33,6 +54,13 @@ exports[`Should Pokemons List component render correctly 1`] = `
     >
       charmander
     </a>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      catch
+    </button>
+    <hr />
   </div>
   <div>
     <a
@@ -41,6 +69,13 @@ exports[`Should Pokemons List component render correctly 1`] = `
     >
       charmeleon
     </a>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      catch
+    </button>
+    <hr />
   </div>
   <div>
     <a
@@ -49,6 +84,13 @@ exports[`Should Pokemons List component render correctly 1`] = `
     >
       charizard
     </a>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      catch
+    </button>
+    <hr />
   </div>
   <div>
     <a
@@ -57,6 +99,13 @@ exports[`Should Pokemons List component render correctly 1`] = `
     >
       squirtle
     </a>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      catch
+    </button>
+    <hr />
   </div>
   <div>
     <a
@@ -65,6 +114,13 @@ exports[`Should Pokemons List component render correctly 1`] = `
     >
       wartortle
     </a>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      catch
+    </button>
+    <hr />
   </div>
   <div>
     <a
@@ -73,6 +129,13 @@ exports[`Should Pokemons List component render correctly 1`] = `
     >
       blastoise
     </a>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      catch
+    </button>
+    <hr />
   </div>
   <div>
     <a
@@ -81,6 +144,13 @@ exports[`Should Pokemons List component render correctly 1`] = `
     >
       caterpie
     </a>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      catch
+    </button>
+    <hr />
   </div>
   <div>
     <a
@@ -89,6 +159,13 @@ exports[`Should Pokemons List component render correctly 1`] = `
     >
       metapod
     </a>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      catch
+    </button>
+    <hr />
   </div>
   <div>
     <a
@@ -97,6 +174,13 @@ exports[`Should Pokemons List component render correctly 1`] = `
     >
       butterfree
     </a>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      catch
+    </button>
+    <hr />
   </div>
   <div>
     <a
@@ -105,6 +189,13 @@ exports[`Should Pokemons List component render correctly 1`] = `
     >
       weedle
     </a>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      catch
+    </button>
+    <hr />
   </div>
   <div>
     <a
@@ -113,6 +204,13 @@ exports[`Should Pokemons List component render correctly 1`] = `
     >
       kakuna
     </a>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      catch
+    </button>
+    <hr />
   </div>
   <div>
     <a
@@ -121,6 +219,13 @@ exports[`Should Pokemons List component render correctly 1`] = `
     >
       beedrill
     </a>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      catch
+    </button>
+    <hr />
   </div>
   <div>
     <a
@@ -129,6 +234,13 @@ exports[`Should Pokemons List component render correctly 1`] = `
     >
       pidgey
     </a>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      catch
+    </button>
+    <hr />
   </div>
   <div>
     <a
@@ -137,6 +249,13 @@ exports[`Should Pokemons List component render correctly 1`] = `
     >
       pidgeotto
     </a>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      catch
+    </button>
+    <hr />
   </div>
   <div>
     <a
@@ -145,6 +264,13 @@ exports[`Should Pokemons List component render correctly 1`] = `
     >
       pidgeot
     </a>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      catch
+    </button>
+    <hr />
   </div>
   <div>
     <a
@@ -153,6 +279,13 @@ exports[`Should Pokemons List component render correctly 1`] = `
     >
       rattata
     </a>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      catch
+    </button>
+    <hr />
   </div>
   <div>
     <a
@@ -161,6 +294,13 @@ exports[`Should Pokemons List component render correctly 1`] = `
     >
       raticate
     </a>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      catch
+    </button>
+    <hr />
   </div>
 </div>
 `;
