@@ -1,40 +1,24 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { nanoid } from 'nanoid';
-import { FilterType } from '../../types';
+import { useSelector, useDispatch } from 'react-redux';
+import MaterialMenu from '../../material/menu';
 import { Filter } from '../../const';
 import { setFilter } from '../../actions/actionCreators';
 
 const Navigation: React.FC = () => {
   const dispatch = useDispatch();
 
+  const activeFilter = useSelector((state) => state.app.filter);
+
   const onFilterClick = (filter) => {
     dispatch(setFilter(filter));
   };
 
   return (
-    <ul>
-      {Object.values(Filter).map((filter) => (
-        <li
-          key={nanoid()}
-        >
-          <div
-            role="button"
-            tabIndex={0}
-            onClick={(evt) => {
-              evt.preventDefault();
-              onFilterClick(filter as FilterType);
-            }}
-            onKeyDown={(evt) => {
-              evt.preventDefault();
-              onFilterClick(filter as FilterType);
-            }}
-          >
-            {filter}
-          </div>
-        </li>
-      ))}
-    </ul>
+    <MaterialMenu
+      options={Object.values(Filter)}
+      selectedOption={activeFilter}
+      clickHandler={onFilterClick}
+    />
   );
 };
 

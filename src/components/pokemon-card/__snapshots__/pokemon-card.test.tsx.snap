@@ -2,7 +2,7 @@
 
 exports[`Should Pokemon Card component render correctly 1`] = `
 <div
-  className="MuiPaper-root MuiCard-root makeStyles-root-1 MuiPaper-elevation1 MuiPaper-rounded"
+  className="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
 >
   <a
     href="/1"
@@ -55,7 +55,7 @@ exports[`Should Pokemon Card component render correctly 1`] = `
     className="MuiCardActions-root MuiCardActions-spacing"
   >
     <button
-      className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-textSizeSmall MuiButton-sizeSmall Mui-disabled Mui-disabled"
+      className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-containedSizeSmall MuiButton-sizeSmall Mui-disabled Mui-disabled"
       disabled={true}
       onBlur={[Function]}
       onClick={[Function]}

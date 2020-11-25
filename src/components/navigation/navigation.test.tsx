@@ -7,7 +7,11 @@ import Navigation from './navigation';
 const mockStore = configureStore([]);
 
 it('Should Navigation component render correctly', () => {
-  const store = mockStore();
+  const store = mockStore({
+    app: {
+      filter: 'default',
+    },
+  });
 
   const node = renderer.create(
     <Provider store={store}>

@@ -3,6 +3,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import MaterialContainer from '../../material/container';
+import MaterialBackLink from '../../material/back-link';
+import MaterialExtendedCard from '../../material/extended-card';
 import { Pokemon } from '../../types';
 
 const PokemonPage: React.FC<RouteComponentProps<{id: string}>> = ({
@@ -15,11 +17,12 @@ const PokemonPage: React.FC<RouteComponentProps<{id: string}>> = ({
 
   return (
     <MaterialContainer>
-      <b>{pokemon.name}</b>
-      <p>{pokemon.id}</p>
-      {
-        isCaught ? `Caught on ${moment(catchDate).format('MM/DD/YYYY')}` : ''
-      }
+      <MaterialBackLink linkAddress="/" />
+      <MaterialExtendedCard
+        image={`/img/${pokemon.id}.png`}
+        header={`${pokemon.name} (id: ${pokemon.id})`}
+        description={isCaught ? `Caught on ${moment(catchDate).format('MM/DD/YYYY')}` : ''}
+      />
     </MaterialContainer>
   );
 };
