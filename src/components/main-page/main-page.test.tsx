@@ -10,8 +10,12 @@ const mockStore = configureStore([]);
 
 it('Should MainPage component render correctly', () => {
   const store = mockStore({
-    pokemons,
-    shownPokemonsCount: 1,
+    data: {
+      pokemons,
+    },
+    app: {
+      shownPokemonsCount: 1,
+    },
   });
 
   const tree = renderer

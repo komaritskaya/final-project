@@ -10,7 +10,9 @@ const mockStore = configureStore([]);
 
 it('Should Pokemon Card component render correctly', () => {
   const store = mockStore({
-    pokemons,
+    data: {
+      pokemons,
+    },
   });
 
   const tree = renderer

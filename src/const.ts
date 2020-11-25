@@ -1,4 +1,4 @@
-export const SHOWN_POKEMONS_COUNT = 10;
+export const SHOWN_POKEMONS_COUNT = 12;
 
 export const Filter = {
   DEFAULT: 'default',

@@ -9,8 +9,12 @@ const mockStore = configureStore([]);
 
 it('Render App', () => {
   const store = mockStore({
-    pokemons,
-    shownPokemonsCount: 1,
+    data: {
+      pokemons,
+    },
+    app: {
+      shownPokemonsCount: 1,
+    },
   });
 
   const tree = renderer

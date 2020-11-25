@@ -12,12 +12,13 @@ import { Path } from '../const';
 
 const URL = 'http://localhost:3000';
 
-function fetchPokemonsSuccess(pokemons) {
-  return { type: FETCH_POKEMONS_SUCCESS, payload: { pokemons } };
-}
-function fetchPokemonsFailure(error) {
-  return { type: FETCH_POKEMONS_FAILURE, payload: { error } };
-}
+export const fetchPokemonsSuccess = (pokemons) => ({
+  type: FETCH_POKEMONS_SUCCESS, payload: { pokemons },
+});
+
+export const fetchPokemonsFailure = (error) => ({
+  type: FETCH_POKEMONS_FAILURE, payload: { error },
+});
 
 export const fetchPokemons = () => (dispatch) => {
   const allPokemonsRequest = axios.get(`${URL}/${Path.POKEMONS}`);
@@ -56,12 +57,13 @@ export const fetchPokemons = () => (dispatch) => {
     });
 };
 
-function catchPokemonSuccess(pokemon) {
-  return { type: CATCH_POKEMON_SUCCESS, payload: { pokemon } };
-}
-function catchPokemonFailure(error) {
-  return { type: CATCH_POKEMON_FAILURE, payload: { error } };
-}
+export const catchPokemonSuccess = (pokemon) => ({
+  type: CATCH_POKEMON_SUCCESS, payload: { pokemon },
+});
+
+export const catchPokemonFailure = (error) => ({
+  type: CATCH_POKEMON_FAILURE, payload: { error },
+});
 
 export const catchPokemon = (pokemon) => (dispatch) => {
   axios.post(`http://localhost:3000/${Path.CAUGHT}`, pokemon).then(() => {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import MaterialButton from '../../material/button';
 import { SHOWN_POKEMONS_COUNT } from '../../const';
 import { addShownPokemons } from '../../actions/actionCreators';
 
@@ -11,14 +12,10 @@ const ShowMoreBtn: React.FC = () => {
   };
 
   return (
-    <div>
-      <button
-        type="button"
-        onClick={() => onButtonClick(SHOWN_POKEMONS_COUNT)}
-      >
-        Show more
-      </button>
-    </div>
+    <MaterialButton
+      value="show more"
+      clickHandler={() => onButtonClick(SHOWN_POKEMONS_COUNT)}
+    />
   );
 };
 

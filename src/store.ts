@@ -2,14 +2,12 @@ import {
   createStore, combineReducers, applyMiddleware, compose,
 } from 'redux';
 import thunk from 'redux-thunk';
-import appReducer from './reducers/app';
-// import addReducer from '../reducers/add';
-// import networkReducer from '../reducers/network';
+import appReducer from './reducers/app/app';
+import dataReducer from './reducers/data/data';
 
 const reducer = combineReducers({
   app: appReducer,
-  // add: addReducer,
-  // network: networkReducer
+  data: dataReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import MaterialCard from '../../material/card';
 import { Pokemon } from '../../types';
 import { catchPokemon } from '../../actions/actionCreators';
 
@@ -16,21 +16,14 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }: PokemonCardProps) 
   };
 
   return (
-    <div>
-      <Link
-        to={`/${pokemon.id}`}
-      >
-        {pokemon.name}
-      </Link>
-      <button
-        type="button"
-        onClick={() => onCatchButtonClick(pokemon.id)}
-        disabled={pokemon.isCaught}
-      >
-        catch
-      </button>
-      <hr />
-    </div>
+    <MaterialCard
+      image={`/img/${pokemon.id}.png`}
+      header={pokemon.name}
+      buttonText="catch"
+      linkAddress={`/${pokemon.id}`}
+      buttonClickHandler={() => onCatchButtonClick(pokemon.id)}
+      isButtonDisabled={pokemon.isCaught}
+    />
   );
 };
 
