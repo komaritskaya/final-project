@@ -22,10 +22,6 @@ const MainPage: React.FC = () => {
 
   const getShownPokemons = (allPokemons, count) => allPokemons.slice(0, count);
 
-  if (!pokemons) {
-    return <div>loading</div>;
-  }
-
   const filteredPokemons = getFilteredPokemons(pokemons, activeFilter);
   const shownPokemons = getShownPokemons(
     filteredPokemons, shownPokemonsCount,

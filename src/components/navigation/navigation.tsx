@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import MaterialMenu from '../../material/menu';
 import { Filter } from '../../const';
@@ -9,9 +9,9 @@ const Navigation: React.FC = () => {
 
   const activeFilter = useSelector((state) => state.app.filter);
 
-  const onFilterClick = (filter) => {
+  const onFilterClick = useCallback((filter) => {
     dispatch(setFilter(filter));
-  };
+  }, [dispatch]);
 
   return (
     <MaterialMenu

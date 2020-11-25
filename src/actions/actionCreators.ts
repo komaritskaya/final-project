@@ -66,7 +66,7 @@ export const catchPokemonFailure = (error) => ({
 });
 
 export const catchPokemon = (pokemon) => (dispatch) => {
-  axios.post(`http://localhost:3000/${Path.CAUGHT}`, pokemon).then(() => {
+  axios.post(`${URL}/${Path.CAUGHT}`, pokemon).then(() => {
     dispatch(catchPokemonSuccess(pokemon));
   }).catch((err) => {
     dispatch(catchPokemonFailure(err));

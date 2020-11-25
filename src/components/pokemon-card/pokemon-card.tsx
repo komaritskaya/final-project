@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import MaterialCard from '../../material/card';
 import { Pokemon } from '../../types';
@@ -11,9 +11,9 @@ interface PokemonCardProps {
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }: PokemonCardProps) => {
   const dispatch = useDispatch();
 
-  const onCatchButtonClick = (id: number) => {
+  const onCatchButtonClick = useCallback((id: number) => {
     dispatch(catchPokemon({ id, catchDate: new Date() }));
-  };
+  }, [dispatch]);
 
   return (
     <MaterialCard
