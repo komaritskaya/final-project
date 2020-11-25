@@ -4,14 +4,13 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import renderer from 'react-test-renderer';
 import PokemonPage from './pokemon-page';
-import { pokemons, userPokemons } from '../../mocks/pokemons';
+import pokemons from '../../mocks/pokemons';
 
 const mockStore = configureStore([]);
 
 it('Should PokemonPage component render correctly', () => {
   const store = mockStore({
     pokemons,
-    userPokemons,
   });
 
   const tree = renderer

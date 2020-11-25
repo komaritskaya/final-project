@@ -1,18 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import store from './store';
 import 'moment/locale/ru';
-// import {movies, currentMovie} from './mocks/films';
-import { reducer } from './reducers/reducer';
 
 import App from './components/app/app';
+import { fetchPokemons } from './actions/actionCreators';
 
-const store = createStore(
-  reducer,
-  // eslint-disable-next-line no-underscore-dangle
-  window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f,
-);
+store.dispatch(fetchPokemons());
+// store.dispatch(fetchUserPokemons());
 
 ReactDOM.render(
   <Provider store={store}>

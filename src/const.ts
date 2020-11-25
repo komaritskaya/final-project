@@ -5,6 +5,11 @@ export const Filter = {
   CAUGHT: 'caught',
 };
 
+export const Path = {
+  POKEMONS: 'pokemons',
+  CAUGHT: 'caught',
+};
+
 export const Status = {
   OK: 200,
   UNAUTHORIZED: 401,

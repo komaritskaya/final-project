@@ -1,60 +1,42 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { pokemons } from '../../mocks/pokemons';
 import {
-  ExtendedPokemon, FilterType, RawPokemon, RootState, UserPokemon,
+  Pokemon, FilterType,
 } from '../../types';
 import Navigation from '../navigation/navigation';
 import PokemonsList from '../pokemons-list/pokemons-list';
 import ShowMoreBtn from '../show-more-btn/show-more-btn';
 
-interface MainPageProps {
-  // pokemons: RawPokemon[];
-  // onCardClick: (id: number) => void;
-  // currentMovie: {
-  //   title: string;
-  //   genre: string;
-  //   year: number;
-  // };
-}
+const MainPage: React.FC = () => {
+  const pokemons = useSelector((state) => state.app.pokemons);
+  const activeFilter = useSelector((state) => state.app.filter);
+  const shownPokemonsCount = useSelector((state) => state.app.shownPokemonsCount);
 
-const MainPage: React.FC<MainPageProps> = () => {
-  const allPokemons = useSelector((state: RootState) => state.pokemons);
-  const activeFilter = useSelector((state: RootState) => state.filter);
-  const userPokemons = useSelector((state: RootState) => state.userPokemons);
-  const shownPokemonsCount = useSelector((state: RootState) => state.shownPokemonsCount);
-  const shownPokemons = allPokemons.slice(0, shownPokemonsCount);
-
-  const getFilteredPokemons = (
-    unFilteredPokemons: RawPokemon[],
-    filter: FilterType,
-  ): (
-    RawPokemon[] | ExtendedPokemon[]
-    ) => {
+  const getFilteredPokemons = (unFilteredPokemons: Pokemon[], filter: FilterType): Pokemon[] => {
     if (filter === FilterType.CAUGHT) {
-      const filteredRawPokemons = unFilteredPokemons.filter((pokemon) => (
-        userPokemons.find((userPokemon: UserPokemon) => pokemon.id === userPokemon.id)
-      ));
-      const filteredExtendedPokemons = filteredRawPokemons.map((pokemon) => {
-        const matchingUserPokemonIndex = userPokemons.findIndex((userPokemon: UserPokemon) => (
-          pokemon.id === userPokemon.id
-        ));
-        const matchingUserPokemon = userPokemons[matchingUserPokemonIndex];
-        return { ...pokemon, ...matchingUserPokemon, isCaught: true };
-      });
-      return filteredExtendedPokemons;
+      return unFilteredPokemons.filter((pokemon) => pokemon.isCaught);
     }
-    return pokemons;
+    return unFilteredPokemons;
   };
+
+  const getShownPokemons = (allPokemons, count) => allPokemons.slice(0, count);
+
+  if (!pokemons) {
+    return <div>loading</div>;
+  }
+
+  const filteredPokemons = getFilteredPokemons(pokemons, activeFilter);
+  const shownPokemons = getShownPokemons(
+    filteredPokemons, shownPokemonsCount,
+  );
 
   return (
     <>
       <Navigation />
       <PokemonsList
-        pokemons={getFilteredPokemons(allPokemons, activeFilter)}
-        // onCardClick={onCardClick}
+        pokemons={shownPokemons}
       />
-      {allPokemons.length > shownPokemons.length && <ShowMoreBtn />}
+      {filteredPokemons.length > shownPokemons.length && <ShowMoreBtn />}
     </>
   );
 };

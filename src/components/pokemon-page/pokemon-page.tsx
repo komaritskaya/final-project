@@ -2,33 +2,22 @@ import moment from 'moment';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { RawPokemon, RootState, UserPokemon } from '../../types';
+import { Pokemon } from '../../types';
 
 const PokemonPage: React.FC<RouteComponentProps<{id: string}>> = ({
   match: { params: { id } },
 }) => {
-  const allPokemons = useSelector((state: RootState) => state.pokemons);
-  const userPokemons = useSelector((state: RootState) => state.userPokemons);
-  const pokemon = allPokemons.find((item: RawPokemon) => item.id.toString() === id)
-    || allPokemons[0];
-  const isCaught = userPokemons.find((userPokemon: UserPokemon) => userPokemon.id === pokemon.id);
-
-  const getCatchDate = (caughtPokemon: RawPokemon) => {
-    const index = userPokemons.findIndex((userPokemon: UserPokemon) => (
-      userPokemon.id === caughtPokemon.id
-    ));
-    if (index === -1) {
-      return null;
-    }
-    return userPokemons[index].catchDate;
-  };
+  const pokemons = useSelector((state) => state.app.pokemons);
+  const pokemon = pokemons.find((item: Pokemon) => item.id.toString() === id)
+    || pokemons[0];
+  const { isCaught, catchDate } = pokemon;
 
   return (
     <>
       <b>{pokemon.name}</b>
       <p>{pokemon.id}</p>
       {
-        isCaught ? `Caught on ${moment(getCatchDate(pokemon)).format('MM/DD/YYYY')}` : ''
+        isCaught ? `Caught on ${moment(catchDate).format('MM/DD/YYYY')}` : ''
       }
     </>
   );

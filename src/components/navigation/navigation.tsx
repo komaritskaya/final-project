@@ -3,13 +3,13 @@ import { useDispatch } from 'react-redux';
 import { nanoid } from 'nanoid';
 import { FilterType } from '../../types';
 import { Filter } from '../../const';
-import { ActionCreator } from '../../reducers/reducer';
+import { setFilter } from '../../actions/actionCreators';
 
 const Navigation: React.FC = () => {
   const dispatch = useDispatch();
 
   const onFilterClick = (filter) => {
-    dispatch(ActionCreator.setFilter(filter));
+    dispatch(setFilter(filter));
   };
 
   return (

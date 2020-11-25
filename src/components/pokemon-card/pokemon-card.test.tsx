@@ -4,13 +4,13 @@ import configureStore from 'redux-mock-store';
 import { BrowserRouter as Router } from 'react-router-dom';
 import renderer from 'react-test-renderer';
 import PokemonCard from './pokemon-card';
-import { pokemons, userPokemons } from '../../mocks/pokemons';
+import pokemons from '../../mocks/pokemons';
 
 const mockStore = configureStore([]);
 
 it('Should Pokemon Card component render correctly', () => {
   const store = mockStore({
-    userPokemons,
+    pokemons,
   });
 
   const tree = renderer

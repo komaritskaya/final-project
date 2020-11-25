@@ -1,21 +1,18 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { RawPokemon, RootState } from '../../types';
-import { ActionCreator } from '../../reducers/reducer';
+import { Pokemon } from '../../types';
+import { catchPokemon } from '../../actions/actionCreators';
 
 interface PokemonCardProps {
-  pokemon: RawPokemon;
+  pokemon: Pokemon;
 }
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }: PokemonCardProps) => {
-  const userPokemons = useSelector((state: RootState) => state.userPokemons);
-  const isCaught = userPokemons.find((userPokemon) => userPokemon.id === pokemon.id);
-
   const dispatch = useDispatch();
 
   const onCatchButtonClick = (id: number) => {
-    dispatch(ActionCreator.catchPokemon(id, new Date()));
+    dispatch(catchPokemon({ id, catchDate: new Date() }));
   };
 
   return (
@@ -28,7 +25,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }: PokemonCardProps) 
       <button
         type="button"
         onClick={() => onCatchButtonClick(pokemon.id)}
-        disabled={isCaught}
+        disabled={pokemon.isCaught}
       >
         catch
       </button>
