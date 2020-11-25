@@ -5,9 +5,10 @@ import store from './store';
 import 'moment/locale/ru';
 
 import App from './components/app/app';
-import { fetchPokemons } from './actions/actionCreators';
+// import { fetchAllPokemons } from './actions/actionCreators';
+// import { SHOWN_POKEMONS_COUNT } from './const';
 
-store.dispatch(fetchPokemons());
+// store.dispatch(fetchAllPokemons(0, SHOWN_POKEMONS_COUNT));
 // store.dispatch(fetchUserPokemons());
 
 ReactDOM.render(

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {
-  FETCH_POKEMONS_SUCCESS,
-  FETCH_POKEMONS_FAILURE,
+  FETCH_ALL_POKEMONS_SUCCESS,
+  FETCH_ALL_POKEMONS_FAILURE,
   CATCH_POKEMON_SUCCESS,
   CATCH_POKEMON_FAILURE,
   SET_FILTER,
@@ -12,49 +12,76 @@ import { Path } from '../const';
 
 const URL = 'http://localhost:3000';
 
-export const fetchPokemonsSuccess = (pokemons) => ({
-  type: FETCH_POKEMONS_SUCCESS, payload: { pokemons },
+export const fetchAllPokemonsSuccess = (pokemons) => ({
+  type: FETCH_ALL_POKEMONS_SUCCESS, payload: { pokemons },
 });
 
-export const fetchPokemonsFailure = (error) => ({
-  type: FETCH_POKEMONS_FAILURE, payload: { error },
+export const fetchAllPokemonsFailure = (error) => ({
+  type: FETCH_ALL_POKEMONS_FAILURE, payload: { error },
 });
 
-export const fetchPokemons = () => (dispatch) => {
-  const allPokemonsRequest = axios.get(`${URL}/${Path.POKEMONS}`);
+export const fetchAllPokemons = (from, to) => (dispatch) => {
+  const pokemonsRequest = axios.get(`${URL}/${Path.POKEMONS}?_start=${from}&_end=${to}`);
   const caughtPokemonsRequest = axios.get(`${URL}/${Path.CAUGHT}`);
-  axios.all([allPokemonsRequest, caughtPokemonsRequest])
-    .then(
-      axios.spread((...responses) => {
-        const allPokemonsResponse = responses[0].data;
-        const caughtPokemonsResponse = responses[1].data;
+  axios.all([pokemonsRequest, caughtPokemonsRequest]).then(
+    axios.spread((...responses) => {
+      const pokemonsResponse = responses[0].data;
+      const caughtPokemonsResponse = responses[1].data;
 
-        const pokemons = allPokemonsResponse.map((pokemon) => {
-          const matchingIndex = caughtPokemonsResponse.findIndex((caughtPokemon) => (
-            caughtPokemon.id === pokemon.id
-          ));
+      const pokemons = pokemonsResponse.map((pokemon) => {
+        const matchingIndex = caughtPokemonsResponse.findIndex((caughtPokemon) => (
+          caughtPokemon.id === pokemon.id
+        ));
 
-          if (matchingIndex === -1) {
-            return {
-              ...pokemon,
-              isCaught: false,
-              catchDate: null,
-            };
-          }
-
+        if (matchingIndex === -1) {
           return {
             ...pokemon,
-            ...caughtPokemonsResponse[matchingIndex],
-            isCaught: true,
+            isCaught: false,
+            catchDate: null,
           };
-        });
+        }
 
-        dispatch(fetchPokemonsSuccess(pokemons));
-      }),
-    )
-    .catch((err) => {
-      dispatch(fetchPokemonsFailure(err));
+        return {
+          ...pokemon,
+          ...caughtPokemonsResponse[matchingIndex],
+          isCaught: true,
+        };
+      });
+
+      dispatch(fetchAllPokemonsSuccess(pokemons));
+    }),
+  ).catch((err) => {
+    dispatch(fetchAllPokemonsFailure(err));
+  });
+};
+
+export const fetchCaughtPokemons = (from, to) => (dispatch) => {
+  axios.get(`${URL}/${Path.CAUGHT}?_start=${from}&_end=${to}`).then((caughtResponse) => {
+    const caughtPokemons = caughtResponse.data;
+    const filter = caughtPokemons.map((item) => `id=${item.id}`).join('&');
+
+    axios.get(`${URL}/${Path.POKEMONS}?${filter}`).then((allResponse) => {
+      const matchedPokemons = allResponse.data;
+
+      const pokemons = caughtPokemons.map((pokemon) => {
+        const matchingIndex = matchedPokemons.findIndex((matchedPokemon) => (
+          matchedPokemon.id === pokemon.id
+        ));
+
+        return {
+          ...pokemon,
+          ...matchedPokemons[matchingIndex],
+          isCaught: true,
+        };
+      });
+
+      dispatch(fetchAllPokemonsSuccess(pokemons));
+    }).catch((err) => {
+      dispatch(fetchAllPokemonsFailure(err));
     });
+  }).catch((err) => {
+    dispatch(fetchAllPokemonsFailure(err));
+  });
 };
 
 export const catchPokemonSuccess = (pokemon) => ({
