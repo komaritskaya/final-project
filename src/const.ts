@@ -12,6 +12,5 @@ export const Path = {
 
 export const Status = {
   OK: 200,
-  UNAUTHORIZED: 401,
   BAD_REQUEST: 400,
 };

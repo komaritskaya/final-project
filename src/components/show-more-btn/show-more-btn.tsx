@@ -1,20 +1,22 @@
 import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import MaterialButton from '../../material/button';
-import { SHOWN_POKEMONS_COUNT } from '../../const';
+// import { SHOWN_POKEMONS_COUNT } from '../../const';
 import { addShownPokemons } from '../../actions/actionCreators';
 
 const ShowMoreBtn: React.FC = () => {
   const dispatch = useDispatch();
+  const pokemons = useSelector((state) => state.data.pokemons);
+  const currentFilter = useSelector((state) => state.app.filter);
 
-  const onButtonClick = useCallback((count) => {
-    dispatch(addShownPokemons(count));
+  const onButtonClick = useCallback((count, filter) => {
+    dispatch(addShownPokemons(count, filter));
   }, [dispatch]);
 
   return (
     <MaterialButton
       value="show more"
-      clickHandler={() => onButtonClick(SHOWN_POKEMONS_COUNT)}
+      clickHandler={() => onButtonClick(pokemons.length, currentFilter)}
     />
   );
 };

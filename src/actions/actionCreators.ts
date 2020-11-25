@@ -1,16 +1,49 @@
 import axios from 'axios';
 import {
+  FETCH_SINGLE_POKEMON_SUCCESS,
+  FETCH_SINGLE_POKEMON_FAILURE,
   FETCH_POKEMONS_SUCCESS,
   FETCH_POKEMONS_FAILURE,
   CATCH_POKEMON_SUCCESS,
   CATCH_POKEMON_FAILURE,
   SET_FILTER,
-  ADD_SHOWN_POKEMONS,
+  // ADD_SHOWN_POKEMONS,
   RESET_SHOWN_POKEMONS,
 } from './actionTypes';
-import { Path } from '../const';
+import { Path, SHOWN_POKEMONS_COUNT, Status } from '../const';
+import { FilterType } from '../types';
 
 const URL = 'http://localhost:3000';
+
+export const fetchSinglePokemonSuccess = (currentPokemon) => ({
+  type: FETCH_SINGLE_POKEMON_SUCCESS, payload: { currentPokemon },
+});
+
+export const fetchSinglePokemonFailure = (error) => ({
+  type: FETCH_SINGLE_POKEMON_FAILURE, payload: { error },
+});
+
+export const fetchSinglePokemon = (id) => (dispatch) => {
+  axios.get(`${URL}/${Path.POKEMONS}/${id}`).then((allResponse) => {
+    axios.get(`${URL}/${Path.CAUGHT}/${id}`).then((caughtResponse) => {
+      dispatch(fetchSinglePokemonSuccess({
+        ...allResponse.data,
+        ...caughtResponse.data,
+        isCaught: true,
+      }));
+    }).catch((caughtError) => {
+      if (caughtError.response.status !== Status.OK) {
+        dispatch(fetchSinglePokemonSuccess({
+          ...allResponse.data,
+          isCaught: false,
+          catchDate: null,
+        }));
+      }
+    });
+  }).catch((allError) => {
+    dispatch(fetchSinglePokemonFailure(allError));
+  });
+};
 
 export const fetchPokemonsSuccess = (pokemons) => ({
   type: FETCH_POKEMONS_SUCCESS, payload: { pokemons },
@@ -105,10 +138,17 @@ export const setFilter = (filter) => ({
   payload: { filter },
 });
 
-export const addShownPokemons = (count) => ({
-  type: ADD_SHOWN_POKEMONS,
-  payload: { count },
-});
+export const addShownPokemons = (currentCount, currentFilter) => (dispatch) => {
+  if (currentFilter === FilterType.CAUGHT) {
+    dispatch(fetchCaughtPokemons(currentCount, currentCount + SHOWN_POKEMONS_COUNT));
+  }
+  dispatch(fetchAllPokemons(currentCount, currentCount + SHOWN_POKEMONS_COUNT));
+};
+
+// export const addShownPokemons = (count) => ({
+//   type: ADD_SHOWN_POKEMONS,
+//   payload: { count },
+// });
 
 export const resetShownPokemons = () => ({
   type: RESET_SHOWN_POKEMONS,

@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import MaterialMenu from '../../material/menu';
 import { Filter } from '../../const';
-import { setFilter } from '../../actions/actionCreators';
+import { setFilter, resetShownPokemons } from '../../actions/actionCreators';
 
 const Navigation: React.FC = () => {
   const dispatch = useDispatch();

@@ -7,21 +7,23 @@ import MaterialContainer from '../../material/container';
 import Navigation from '../navigation/navigation';
 import PokemonsList from '../pokemons-list/pokemons-list';
 import ShowMoreBtn from '../show-more-btn/show-more-btn';
-import { fetchAllPokemons, fetchCaughtPokemons } from '../../actions/actionCreators';
+import { addShownPokemons, resetShownPokemons, fetchCaughtPokemons } from '../../actions/actionCreators';
+import { SHOWN_POKEMONS_COUNT } from '../../const';
 
 const MainPage: React.FC = () => {
   const dispatch = useDispatch();
 
-  const pokemons = useSelector((state) => state.data.pokemons);
+  const pokemons = useSelector((state) => {
+    console.log(state);
+    return state.data.pokemons;
+  });
   const activeFilter = useSelector((state) => state.app.filter);
-  const shownPokemonsCount = useSelector((state) => state.app.shownPokemonsCount);
+  // const shownPokemonsCount = useSelector((state) => state.app.shownPokemonsCount);
 
   useEffect(() => {
-    if (activeFilter === FilterType.CAUGHT) {
-      dispatch(fetchCaughtPokemons(0, shownPokemonsCount));
-    }
-    dispatch(fetchAllPokemons(0, shownPokemonsCount));
-  }, [dispatch, shownPokemonsCount, activeFilter]);
+    dispatch(resetShownPokemons());
+    dispatch(addShownPokemons(0, activeFilter));
+  }, [dispatch, activeFilter]);
 
   return (
     <MaterialContainer>
