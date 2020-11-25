@@ -1,10 +1,10 @@
 import dataReducer from './data';
 import {
-  fetchAllPokemonsSuccess,
+  fetchPokemonsSuccess,
   catchPokemonSuccess,
 } from '../../actions/actionCreators';
 import {
-  FETCH_ALL_POKEMONS_SUCCESS,
+  FETCH_POKEMONS_SUCCESS,
   CATCH_POKEMON_SUCCESS,
 } from '../../actions/actionTypes';
 import pokemons from '../../mocks/pokemons';
@@ -19,7 +19,7 @@ it('Reducer without additional parameters should return initial state', () => {
 
 it('Reducer should change pokemons list to a given value', () => {
   expect(dataReducer(initialState, {
-    type: FETCH_ALL_POKEMONS_SUCCESS,
+    type: FETCH_POKEMONS_SUCCESS,
     payload: {
       pokemons: [],
     },
@@ -42,10 +42,10 @@ it('Reducer should modify a pokemon in pokemons list', () => {
   });
 });
 
-describe('fetchAllPokemonsSuccess works correctly', () => {
+describe('fetchPokemonsSuccess works correctly', () => {
   it('Action creator for changing filter returns correct action', () => {
-    expect(fetchAllPokemonsSuccess(pokemons)).toEqual({
-      type: FETCH_ALL_POKEMONS_SUCCESS,
+    expect(fetchPokemonsSuccess(pokemons)).toEqual({
+      type: FETCH_POKEMONS_SUCCESS,
       payload: {
         pokemons,
       },

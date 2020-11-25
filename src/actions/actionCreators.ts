@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {
-  FETCH_ALL_POKEMONS_SUCCESS,
-  FETCH_ALL_POKEMONS_FAILURE,
+  FETCH_POKEMONS_SUCCESS,
+  FETCH_POKEMONS_FAILURE,
   CATCH_POKEMON_SUCCESS,
   CATCH_POKEMON_FAILURE,
   SET_FILTER,
@@ -12,12 +12,12 @@ import { Path } from '../const';
 
 const URL = 'http://localhost:3000';
 
-export const fetchAllPokemonsSuccess = (pokemons) => ({
-  type: FETCH_ALL_POKEMONS_SUCCESS, payload: { pokemons },
+export const fetchPokemonsSuccess = (pokemons) => ({
+  type: FETCH_POKEMONS_SUCCESS, payload: { pokemons },
 });
 
-export const fetchAllPokemonsFailure = (error) => ({
-  type: FETCH_ALL_POKEMONS_FAILURE, payload: { error },
+export const fetchPokemonsFailure = (error) => ({
+  type: FETCH_POKEMONS_FAILURE, payload: { error },
 });
 
 export const fetchAllPokemons = (from, to) => (dispatch) => {
@@ -48,10 +48,10 @@ export const fetchAllPokemons = (from, to) => (dispatch) => {
         };
       });
 
-      dispatch(fetchAllPokemonsSuccess(pokemons));
+      dispatch(fetchPokemonsSuccess(pokemons));
     }),
   ).catch((err) => {
-    dispatch(fetchAllPokemonsFailure(err));
+    dispatch(fetchPokemonsFailure(err));
   });
 };
 
@@ -75,12 +75,12 @@ export const fetchCaughtPokemons = (from, to) => (dispatch) => {
         };
       });
 
-      dispatch(fetchAllPokemonsSuccess(pokemons));
+      dispatch(fetchPokemonsSuccess(pokemons));
     }).catch((err) => {
-      dispatch(fetchAllPokemonsFailure(err));
+      dispatch(fetchPokemonsFailure(err));
     });
   }).catch((err) => {
-    dispatch(fetchAllPokemonsFailure(err));
+    dispatch(fetchPokemonsFailure(err));
   });
 };
 

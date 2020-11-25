@@ -1,5 +1,5 @@
 import {
-  FETCH_ALL_POKEMONS_SUCCESS,
+  FETCH_POKEMONS_SUCCESS,
   CATCH_POKEMON_SUCCESS,
 } from '../../actions/actionTypes';
 
@@ -9,7 +9,7 @@ const initialState = {
 
 export default function dataReducer(state = initialState, action) {
   switch (action.type) {
-    case FETCH_ALL_POKEMONS_SUCCESS:
+    case FETCH_POKEMONS_SUCCESS:
       const { pokemons } = action.payload;
       return { ...state, pokemons };
     case CATCH_POKEMON_SUCCESS:
