@@ -1,4 +1,6 @@
-# POKEDEX - simple yet elegant app for creating your own pokemons collection
+# POKEDEX
+
+=== **simple yet elegant app for creating your own pokemons collection** ===
 
 Built with the usage of:
 

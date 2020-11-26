@@ -4,7 +4,7 @@ import MaterialContainer from '../../material/container';
 import Navigation from '../navigation/navigation';
 import PokemonsList from '../pokemons-list/pokemons-list';
 import ShowMoreBtn from '../show-more-btn/show-more-btn';
-import { fetchPokemons } from '../../actions/actionCreators';
+import { fetchPokemons, resetShownPokemons } from '../../actions/actionCreators';
 import { SHOWN_POKEMONS_COUNT } from '../../const';
 
 const MainPage: React.FC = () => {
@@ -14,7 +14,11 @@ const MainPage: React.FC = () => {
   const activeFilter = useSelector((state) => state.app.filter);
 
   useEffect(() => {
-    dispatch(fetchPokemons(activeFilter, pokemons.length, pokemons.length + SHOWN_POKEMONS_COUNT));
+    dispatch(fetchPokemons(activeFilter, 0, SHOWN_POKEMONS_COUNT));
+
+    return () => {
+      dispatch(resetShownPokemons());
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
