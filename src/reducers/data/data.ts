@@ -1,6 +1,5 @@
 import {
   FETCH_SINGLE_POKEMON_SUCCESS,
-  // FETCH_SINGLE_POKEMON_FAILURE
   FETCH_POKEMONS_SUCCESS,
   CATCH_POKEMON_SUCCESS,
   RESET_SHOWN_POKEMONS,
@@ -15,12 +14,9 @@ export default function dataReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_SINGLE_POKEMON_SUCCESS:
       const { currentPokemon } = action.payload;
-      // console.log(action.payload);
-      // return { ...state, pokemons };
       return { ...state, currentPokemon };
     case FETCH_POKEMONS_SUCCESS:
       const { pokemons } = action.payload;
-      // return { ...state, pokemons };
       return { ...state, pokemons: [...state.pokemons, ...pokemons] };
     case CATCH_POKEMON_SUCCESS:
       const { pokemon } = action.payload;

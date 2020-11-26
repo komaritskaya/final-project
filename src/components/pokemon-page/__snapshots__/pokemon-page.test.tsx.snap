@@ -52,29 +52,5 @@ exports[`Should PokemonPage component render correctly 1`] = `
       </span>
     </button>
   </a>
-  <div
-    className="MuiPaper-root MuiPaper-elevation3 MuiPaper-rounded"
-  >
-    <img
-      alt="bulbasaur (id: 1)"
-      className="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img"
-      src="/img/1.png"
-      title="bulbasaur (id: 1)"
-    />
-    <div
-      className="MuiCardContent-root"
-    >
-      <p
-        className="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom"
-      >
-        BULBASAUR (ID: 1)
-      </p>
-      <p
-        className="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextSecondary"
-      >
-        Caught on 11/25/2020
-      </p>
-    </div>
-  </div>
 </div>
 `;

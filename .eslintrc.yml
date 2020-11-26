@@ -29,5 +29,5 @@ settings:
 rules: {
   'react/jsx-one-expression-per-line': 'off',
   'react/prop-types': 'off',
-  'no-case-declarations': 'off'
+  'no-case-declarations': 'off',
 }

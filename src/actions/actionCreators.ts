@@ -1,9 +1,12 @@
 import axios from 'axios';
 import {
+  FETCH_SINGLE_POKEMON_REQUEST,
   FETCH_SINGLE_POKEMON_SUCCESS,
   FETCH_SINGLE_POKEMON_FAILURE,
+  FETCH_POKEMONS_REQUEST,
   FETCH_POKEMONS_SUCCESS,
   FETCH_POKEMONS_FAILURE,
+  CATCH_POKEMON_REQUEST,
   CATCH_POKEMON_SUCCESS,
   CATCH_POKEMON_FAILURE,
   SET_FILTER,
@@ -15,6 +18,10 @@ import { FilterType } from '../types';
 
 const URL = 'http://localhost:3000';
 
+export const fetchSinglePokemonRequest = () => ({
+  type: FETCH_SINGLE_POKEMON_REQUEST,
+});
+
 export const fetchSinglePokemonSuccess = (currentPokemon) => ({
   type: FETCH_SINGLE_POKEMON_SUCCESS, payload: { currentPokemon },
 });
@@ -24,6 +31,7 @@ export const fetchSinglePokemonFailure = (error) => ({
 });
 
 export const fetchSinglePokemon = (id) => (dispatch) => {
+  dispatch(fetchSinglePokemonRequest());
   axios.get(`${URL}/${Path.POKEMONS}/${id}`).then((allResponse) => {
     axios.get(`${URL}/${Path.CAUGHT}/${id}`).then((caughtResponse) => {
       dispatch(fetchSinglePokemonSuccess({
@@ -45,6 +53,10 @@ export const fetchSinglePokemon = (id) => (dispatch) => {
   });
 };
 
+export const fetchPokemonsRequest = () => ({
+  type: FETCH_POKEMONS_REQUEST,
+});
+
 export const fetchPokemonsSuccess = (pokemons) => ({
   type: FETCH_POKEMONS_SUCCESS, payload: { pokemons },
 });
@@ -54,6 +66,7 @@ export const fetchPokemonsFailure = (error) => ({
 });
 
 export const fetchAllPokemons = (from, to) => (dispatch) => {
+  dispatch(fetchPokemonsRequest());
   const pokemonsRequest = axios.get(`${URL}/${Path.POKEMONS}?_start=${from}&_end=${to}`);
   const caughtPokemonsRequest = axios.get(`${URL}/${Path.CAUGHT}`);
   axios.all([pokemonsRequest, caughtPokemonsRequest]).then(
@@ -89,6 +102,7 @@ export const fetchAllPokemons = (from, to) => (dispatch) => {
 };
 
 export const fetchCaughtPokemons = (from, to) => (dispatch) => {
+  dispatch(fetchPokemonsRequest());
   axios.get(`${URL}/${Path.CAUGHT}?_start=${from}&_end=${to}`).then((caughtResponse) => {
     const caughtPokemons = caughtResponse.data;
     const filter = caughtPokemons.map((item) => `id=${item.id}`).join('&');
@@ -117,6 +131,18 @@ export const fetchCaughtPokemons = (from, to) => (dispatch) => {
   });
 };
 
+export const fetchPokemons = (filter, from, to) => (dispatch) => {
+  if (filter === FilterType.CAUGHT) {
+    dispatch(fetchCaughtPokemons(from, to));
+  } else {
+    dispatch(fetchAllPokemons(from, to));
+  }
+};
+
+export const catchPokemonRequest = () => ({
+  type: CATCH_POKEMON_REQUEST,
+});
+
 export const catchPokemonSuccess = (pokemon) => ({
   type: CATCH_POKEMON_SUCCESS, payload: { pokemon },
 });
@@ -126,6 +152,7 @@ export const catchPokemonFailure = (error) => ({
 });
 
 export const catchPokemon = (pokemon) => (dispatch) => {
+  dispatch(catchPokemonRequest());
   axios.post(`${URL}/${Path.CAUGHT}`, pokemon).then(() => {
     dispatch(catchPokemonSuccess(pokemon));
   }).catch((err) => {
@@ -138,18 +165,12 @@ export const setFilter = (filter) => ({
   payload: { filter },
 });
 
-export const addShownPokemons = (currentCount, currentFilter) => (dispatch) => {
-  if (currentFilter === FilterType.CAUGHT) {
-    dispatch(fetchCaughtPokemons(currentCount, currentCount + SHOWN_POKEMONS_COUNT));
-  }
-  dispatch(fetchAllPokemons(currentCount, currentCount + SHOWN_POKEMONS_COUNT));
-};
-
-// export const addShownPokemons = (count) => ({
-//   type: ADD_SHOWN_POKEMONS,
-//   payload: { count },
-// });
-
 export const resetShownPokemons = () => ({
   type: RESET_SHOWN_POKEMONS,
 });
+
+export const changeFilter = (filter) => (dispatch) => {
+  dispatch(resetShownPokemons());
+  dispatch(setFilter(filter));
+  dispatch(fetchPokemons(filter, 0, SHOWN_POKEMONS_COUNT));
+};

@@ -10,6 +10,7 @@ import {
 import pokemons from '../../mocks/pokemons';
 
 const initialState = {
+  currentPokemon: null,
   pokemons,
 };
 
@@ -23,7 +24,7 @@ it('Reducer should change pokemons list to a given value', () => {
     payload: {
       pokemons: [],
     },
-  })).toEqual({ ...initialState, pokemons: [] });
+  })).toEqual({ ...initialState, pokemons });
 });
 
 it('Reducer should modify a pokemon in pokemons list', () => {

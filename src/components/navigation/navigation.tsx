@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import MaterialMenu from '../../material/menu';
 import { Filter } from '../../const';
-import { setFilter, resetShownPokemons } from '../../actions/actionCreators';
+import { changeFilter } from '../../actions/actionCreators';
 
 const Navigation: React.FC = () => {
   const dispatch = useDispatch();
@@ -10,7 +10,7 @@ const Navigation: React.FC = () => {
   const activeFilter = useSelector((state) => state.app.filter);
 
   const onFilterClick = useCallback((filter) => {
-    dispatch(setFilter(filter));
+    dispatch(changeFilter(filter));
   }, [dispatch]);
 
   return (
