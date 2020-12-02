@@ -14,7 +14,7 @@ it('Should PokemonPage component render correctly', () => {
       pokemons,
     },
     app: {
-      isLoading: false,
+      isFetchSinglePokemonLoading: false,
       error: null,
     },
   });

@@ -34,7 +34,9 @@ export enum FilterType {
 export interface State {
   app: {
     filter: FilterType;
-    isLoading: boolean;
+    isFetchSinglePokemonLoading: boolean;
+    isFetchPokemonsLoading: boolean;
+    isCatchPokemonLoading: boolean;
     error: Error;
     pokemonIdInProgress: number;
   };

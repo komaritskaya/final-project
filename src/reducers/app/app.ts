@@ -14,7 +14,9 @@ import { AppAction, FilterType } from '../../types';
 
 const initialState = {
   filter: FilterType.DEFAULT,
-  isLoading: false,
+  isFetchPokemonsLoading: false,
+  isFetchSinglePokemonLoading: false,
+  isCatchPokemonLoading: false,
   error: null,
   pokemonIdInProgress: null,
 };
@@ -22,28 +24,28 @@ const initialState = {
 export default function appReducer(state = initialState, action: AppAction) {
   switch (action.type) {
     case FETCH_SINGLE_POKEMON_REQUEST:
-      return { ...state, isLoading: true, error: null };
+      return { ...state, isFetchSinglePokemonLoading: true, error: null };
     case FETCH_SINGLE_POKEMON_SUCCESS:
-      return { ...state, isLoading: false, error: null };
+      return { ...state, isFetchSinglePokemonLoading: false, error: null };
     case FETCH_SINGLE_POKEMON_FAILURE:
-      return { ...state, isLoading: false, error: action.payload.error };
+      return { ...state, isFetchSinglePokemonLoading: false, error: action.payload.error };
     case FETCH_POKEMONS_REQUEST:
-      return { ...state, isLoading: true, error: null };
+      return { ...state, isFetchPokemonsLoading: true, error: null };
     case FETCH_POKEMONS_SUCCESS:
-      return { ...state, isLoading: false, error: null };
+      return { ...state, isFetchPokemonsLoading: false, error: null };
     case FETCH_POKEMONS_FAILURE:
-      return { ...state, isLoading: false, error: action.payload.error };
+      return { ...state, isFetchPokemonsLoading: false, error: action.payload.error };
     case CATCH_POKEMON_REQUEST:
       return {
-        ...state, isLoading: true, pokemonIdInProgress: action.payload.id, error: null,
+        ...state, isCatchPokemonLoading: true, pokemonIdInProgress: action.payload.id, error: null,
       };
     case CATCH_POKEMON_SUCCESS:
       return {
-        ...state, isLoading: false, error: null, pokemonIdInProgress: null,
+        ...state, isCatchPokemonLoading: false, error: null, pokemonIdInProgress: null,
       };
     case CATCH_POKEMON_FAILURE:
       return {
-        ...state, isLoading: false, error: action.payload.error,
+        ...state, isCatchPokemonLoading: false, error: action.payload.error,
       };
     case SET_FILTER:
       const { filter } = action.payload;

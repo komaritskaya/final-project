@@ -1,10 +1,12 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 interface MaterialButtonProps {
   value: string;
   clickHandler: () => void;
+  isLoading: boolean;
 }
 
 const useStyles = makeStyles(() => ({
@@ -14,7 +16,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const MaterialButton: React.FC<MaterialButtonProps> = ({
-  value, clickHandler,
+  value, clickHandler, isLoading,
 }: MaterialButtonProps) => {
   const classes = useStyles();
 
@@ -27,7 +29,8 @@ const MaterialButton: React.FC<MaterialButtonProps> = ({
       fullWidth
       onClick={clickHandler}
     >
-      {value.toUpperCase()}
+      {isLoading && <CircularProgress color="inherit" size={22} />}
+      {!isLoading && value.toUpperCase()}
     </Button>
   );
 };

@@ -16,7 +16,9 @@ const PokemonPage: React.FC<RouteComponentProps<{id: string}>> = ({
 }) => {
   const dispatch = useDispatch();
   const pokemon = useSelector((state: State) => state.data.currentPokemon);
-  const isLoading = useSelector((state: State) => state.app.isLoading);
+  const isFetchSinglePokemonLoading = useSelector(
+    (state: State) => state.app.isFetchSinglePokemonLoading,
+  );
   const error = useSelector((state: State) => state.app.error);
 
   useEffect(() => {
@@ -28,7 +30,7 @@ const PokemonPage: React.FC<RouteComponentProps<{id: string}>> = ({
   }, [dispatch, id]);
 
   const renderCard = () => {
-    if (isLoading) {
+    if (isFetchSinglePokemonLoading) {
       return <MaterialProgress />;
     }
     if (error) {

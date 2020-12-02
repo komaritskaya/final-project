@@ -11,6 +11,7 @@ const ShowMoreBtn: React.FC = () => {
   const dispatch = useDispatch();
   const pokemons = useSelector((state: State) => state.data.pokemons);
   const activeFilter = useSelector((state: State) => state.app.filter);
+  const isFetchPokemonsLoading = useSelector((state: State) => state.app.isFetchPokemonsLoading);
 
   useEffect(() => {
     const path = activeFilter === FilterType.CAUGHT ? Path.CAUGHT : Path.POKEMONS;
@@ -35,6 +36,7 @@ const ShowMoreBtn: React.FC = () => {
     <MaterialButton
       value="show more"
       clickHandler={() => onButtonClick()}
+      isLoading={isFetchPokemonsLoading}
     />
   );
 };

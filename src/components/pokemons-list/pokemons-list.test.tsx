@@ -14,7 +14,7 @@ it('Should Pokemons List component render correctly', () => {
       pokemons,
     },
     app: {
-      isLoading: false,
+      isCatchPokemonLoading: false,
       error: null,
       pokemonIdInProgress: null,
     },

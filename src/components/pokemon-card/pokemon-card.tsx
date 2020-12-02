@@ -10,7 +10,7 @@ interface PokemonCardProps {
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }: PokemonCardProps) => {
   const dispatch = useDispatch();
-  const isLoading = useSelector((state: State) => state.app.isLoading);
+  const isCatchPokemonLoading = useSelector((state: State) => state.app.isCatchPokemonLoading);
   const isError = useSelector((state: State) => state.app.error);
   const pokemonIdInProgress = useSelector((state: State) => state.app.pokemonIdInProgress);
 
@@ -26,7 +26,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }: PokemonCardProps) 
       linkAddress={`/${pokemon.id}`}
       buttonClickHandler={() => onCatchButtonClick(pokemon.id)}
       isButtonDisabled={pokemon.isCaught}
-      isLoading={isLoading && pokemonIdInProgress === pokemon.id}
+      isLoading={isCatchPokemonLoading && pokemonIdInProgress === pokemon.id}
       isError={isError && pokemonIdInProgress === pokemon.id}
     />
   );

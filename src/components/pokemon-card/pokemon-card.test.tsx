@@ -14,7 +14,8 @@ it('Should Pokemon Card component render correctly', () => {
       pokemons,
     },
     app: {
-      isLoading: false,
+      isFetchPokemonsLoading: false,
+      isCatchPokemonLoading: false,
       error: null,
       pokemonIdInProgress: null,
     },

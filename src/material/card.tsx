@@ -61,7 +61,7 @@ const MaterialCard: React.FC<MaterialCardProps> = ({
         onClick={buttonClickHandler}
         disabled={isButtonDisabled}
       >
-        {isLoading && <CircularProgress size={22} />}
+        {isLoading && <CircularProgress color="inherit" size={22} />}
         {!isLoading && buttonText}
       </Button>
       {isError && (
