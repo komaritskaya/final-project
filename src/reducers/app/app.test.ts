@@ -24,6 +24,7 @@ const initialState = {
   filter: FilterType.DEFAULT,
   isLoading: false,
   error: null,
+  pokemonIdInProgress: null,
 };
 
 it('Reducer should change filter to a given value', () => {

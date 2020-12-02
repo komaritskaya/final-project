@@ -13,7 +13,7 @@ import {
   SET_FILTER,
   RESET_SHOWN_POKEMONS,
 } from './actionTypes';
-import { Path, Status } from '../const';
+import { URL, Path, Status } from '../const';
 import {
   RawPokemon,
   UserPokemon,
@@ -22,8 +22,6 @@ import {
   DataAction,
   AppAction,
 } from '../types';
-
-const URL = 'http://localhost:3000';
 
 export const fetchSinglePokemonRequest = (): AppAction => ({
   type: FETCH_SINGLE_POKEMON_REQUEST,
@@ -152,8 +150,8 @@ export const fetchPokemons = (filter: FilterType, from: number, to: number) => (
   }
 };
 
-export const catchPokemonRequest = (): AppAction => ({
-  type: CATCH_POKEMON_REQUEST,
+export const catchPokemonRequest = (id: number): AppAction => ({
+  type: CATCH_POKEMON_REQUEST, payload: { id },
 });
 
 export const catchPokemonSuccess = (pokemon: UserPokemon): DataAction => ({
@@ -167,7 +165,7 @@ export const catchPokemonFailure = (error: Error): AppAction => ({
 export const catchPokemon = (pokemon: UserPokemon) => (
   dispatch: Dispatch<DataAction | AppAction>,
 ) => {
-  dispatch(catchPokemonRequest());
+  dispatch(catchPokemonRequest(pokemon.id));
   axios.post(`${URL}/${Path.CAUGHT}`, pokemon).then(() => {
     dispatch(catchPokemonSuccess(pokemon));
   }).catch((err) => {

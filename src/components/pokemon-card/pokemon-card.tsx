@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import MaterialCard from '../../material/card';
-import { Pokemon } from '../../types';
+import { Pokemon, State } from '../../types';
 import { catchPokemon } from '../../actions/actionCreators';
 
 interface PokemonCardProps {
@@ -10,6 +10,9 @@ interface PokemonCardProps {
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }: PokemonCardProps) => {
   const dispatch = useDispatch();
+  const isLoading = useSelector((state: State) => state.app.isLoading);
+  const isError = useSelector((state: State) => state.app.error);
+  const pokemonIdInProgress = useSelector((state: State) => state.app.pokemonIdInProgress);
 
   const onCatchButtonClick = useCallback((id: number) => {
     dispatch(catchPokemon({ id, catchDate: new Date() }));
@@ -23,6 +26,8 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }: PokemonCardProps) 
       linkAddress={`/${pokemon.id}`}
       buttonClickHandler={() => onCatchButtonClick(pokemon.id)}
       isButtonDisabled={pokemon.isCaught}
+      isLoading={isLoading && pokemonIdInProgress === pokemon.id}
+      isError={isError && pokemonIdInProgress === pokemon.id}
     />
   );
 };

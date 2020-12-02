@@ -392,29 +392,5 @@ exports[`Should MainPage component render correctly 1`] = `
       </div>
     </div>
   </div>
-  <button
-    className="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-root-5 MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge MuiButton-fullWidth"
-    disabled={false}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onDragLeave={[Function]}
-    onFocus={[Function]}
-    onKeyDown={[Function]}
-    onKeyUp={[Function]}
-    onMouseDown={[Function]}
-    onMouseLeave={[Function]}
-    onMouseUp={[Function]}
-    onTouchEnd={[Function]}
-    onTouchMove={[Function]}
-    onTouchStart={[Function]}
-    tabIndex={0}
-    type="button"
-  >
-    <span
-      className="MuiButton-label"
-    >
-      SHOW MORE
-    </span>
-  </button>
 </div>
 `;

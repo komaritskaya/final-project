@@ -36,6 +36,7 @@ export interface State {
     filter: FilterType;
     isLoading: boolean;
     error: Error;
+    pokemonIdInProgress: number;
   };
   data: {
     currentPokemon: Pokemon;
@@ -73,6 +74,7 @@ export interface FetchSinglePokemonSuccessAction {
 
 export interface CatchPokemonRequestAction {
   type: typeof CATCH_POKEMON_REQUEST;
+  payload: { id: number },
 }
 
 export interface CatchPokemonFailureAction {

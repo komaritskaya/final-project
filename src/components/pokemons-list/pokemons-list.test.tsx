@@ -13,6 +13,11 @@ it('Should Pokemons List component render correctly', () => {
     data: {
       pokemons,
     },
+    app: {
+      isLoading: false,
+      error: null,
+      pokemonIdInProgress: null,
+    },
   });
 
   const tree = renderer

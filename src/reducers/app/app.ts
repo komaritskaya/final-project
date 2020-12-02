@@ -16,6 +16,7 @@ const initialState = {
   filter: FilterType.DEFAULT,
   isLoading: false,
   error: null,
+  pokemonIdInProgress: null,
 };
 
 export default function appReducer(state = initialState, action: AppAction) {
@@ -33,11 +34,17 @@ export default function appReducer(state = initialState, action: AppAction) {
     case FETCH_POKEMONS_FAILURE:
       return { ...state, isLoading: false, error: action.payload.error };
     case CATCH_POKEMON_REQUEST:
-      return { ...state, isLoading: true, error: null };
+      return {
+        ...state, isLoading: true, pokemonIdInProgress: action.payload.id, error: null,
+      };
     case CATCH_POKEMON_SUCCESS:
-      return { ...state, isLoading: false, error: null };
+      return {
+        ...state, isLoading: false, error: null, pokemonIdInProgress: null,
+      };
     case CATCH_POKEMON_FAILURE:
-      return { ...state, isLoading: false, error: action.payload.error };
+      return {
+        ...state, isLoading: false, error: action.payload.error,
+      };
     case SET_FILTER:
       const { filter } = action.payload;
       return { ...state, filter };

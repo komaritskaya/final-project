@@ -5,6 +5,8 @@ export const SHOWN_POKEMONS_COUNT = 12;
 //   CAUGHT: 'caught',
 // };
 
+export const URL = 'http://localhost:3000';
+
 export const Path = {
   POKEMONS: 'pokemons',
   CAUGHT: 'caught',
