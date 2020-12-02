@@ -2,15 +2,20 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
+interface MaterialButtonProps {
+  value: string;
+  clickHandler: () => void;
+}
+
 const useStyles = makeStyles(() => ({
   root: {
     maxWidth: '700px',
   },
 }));
 
-const MaterialButton = ({
+const MaterialButton: React.FC<MaterialButtonProps> = ({
   value, clickHandler,
-}) => {
+}: MaterialButtonProps) => {
   const classes = useStyles();
 
   return (

@@ -6,8 +6,11 @@ import {
   FETCH_POKEMONS_REQUEST,
   FETCH_POKEMONS_SUCCESS,
   FETCH_POKEMONS_FAILURE,
+  CATCH_POKEMON_REQUEST,
+  CATCH_POKEMON_SUCCESS,
+  CATCH_POKEMON_FAILURE,
 } from '../../actions/actionTypes';
-import { FilterType } from '../../types';
+import { AppAction, FilterType } from '../../types';
 
 const initialState = {
   filter: FilterType.DEFAULT,
@@ -15,7 +18,7 @@ const initialState = {
   error: null,
 };
 
-export default function appReducer(state = initialState, action) {
+export default function appReducer(state = initialState, action: AppAction) {
   switch (action.type) {
     case FETCH_SINGLE_POKEMON_REQUEST:
       return { ...state, isLoading: true, error: null };
@@ -28,6 +31,12 @@ export default function appReducer(state = initialState, action) {
     case FETCH_POKEMONS_SUCCESS:
       return { ...state, isLoading: false, error: null };
     case FETCH_POKEMONS_FAILURE:
+      return { ...state, isLoading: false, error: action.payload.error };
+    case CATCH_POKEMON_REQUEST:
+      return { ...state, isLoading: true, error: null };
+    case CATCH_POKEMON_SUCCESS:
+      return { ...state, isLoading: false, error: null };
+    case CATCH_POKEMON_FAILURE:
       return { ...state, isLoading: false, error: action.payload.error };
     case SET_FILTER:
       const { filter } = action.payload;

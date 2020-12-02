@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SimpleCard() {
+const MaterialError: React.FC = () => {
   const classes = useStyles();
 
   return (
@@ -29,4 +29,6 @@ export default function SimpleCard() {
       </CardContent>
     </Card>
   );
-}
+};
+
+export default MaterialError;

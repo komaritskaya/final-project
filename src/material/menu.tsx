@@ -3,6 +3,12 @@ import { nanoid } from 'nanoid';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
+interface MaterialMenuProps {
+  options: string[];
+  clickHandler: (option: string) => void;
+  selectedOption: string;
+}
+
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
@@ -11,11 +17,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MaterialMenu = ({
+const MaterialMenu: React.FC<MaterialMenuProps> = ({
   options,
   clickHandler,
   selectedOption,
-}) => {
+}: MaterialMenuProps) => {
   const classes = useStyles();
 
   return (

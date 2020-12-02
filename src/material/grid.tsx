@@ -3,6 +3,10 @@ import { nanoid } from 'nanoid';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
+interface MaterialGridProps {
+  children: React.ReactNode;
+}
+
 const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
@@ -14,7 +18,9 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const MaterialGrid = ({ children }) => {
+const MaterialGrid: React.FC<MaterialGridProps> = (
+  { children }: MaterialGridProps,
+) => {
   const classes = useStyles();
 
   return (

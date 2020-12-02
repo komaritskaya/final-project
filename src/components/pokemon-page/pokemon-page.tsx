@@ -1,4 +1,4 @@
-import moment from 'moment';
+import { format } from 'date-fns';
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
@@ -9,14 +9,15 @@ import MaterialProgress from '../../material/progress';
 import MaterialError from '../../material/error';
 
 import { fetchSinglePokemon, fetchSinglePokemonSuccess } from '../../actions/actionCreators';
+import { State } from '../../types';
 
 const PokemonPage: React.FC<RouteComponentProps<{id: string}>> = ({
   match: { params: { id } },
 }) => {
   const dispatch = useDispatch();
-  const pokemon = useSelector((state) => state.data.currentPokemon);
-  const isLoading = useSelector((state) => state.app.isLoading);
-  const error = useSelector((state) => state.app.error);
+  const pokemon = useSelector((state: State) => state.data.currentPokemon);
+  const isLoading = useSelector((state: State) => state.app.isLoading);
+  const error = useSelector((state: State) => state.app.error);
 
   useEffect(() => {
     dispatch(fetchSinglePokemon(id));
@@ -38,7 +39,7 @@ const PokemonPage: React.FC<RouteComponentProps<{id: string}>> = ({
       <MaterialExtendedCard
         image={`/img/${pokemon.id}.png`}
         header={`${pokemon.name} (id: ${pokemon.id})`}
-        description={pokemon.isCaught ? `Caught on ${moment(pokemon.catchDate).format('MM/DD/YYYY')}` : ''}
+        description={pokemon.isCaught ? `Caught on ${format(new Date(pokemon.catchDate), 'MM/dd/yyyy')}` : ''}
       />
     );
   };

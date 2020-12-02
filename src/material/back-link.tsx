@@ -4,13 +4,19 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
+interface MaterialBackLinkProps {
+  linkAddress: string;
+}
+
 const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
   },
 }));
 
-const MaterialBackLink = ({ linkAddress }) => {
+const MaterialBackLink: React.FC<MaterialBackLinkProps> = (
+  { linkAddress }: MaterialBackLinkProps,
+) => {
   const classes = useStyles();
 
   return (

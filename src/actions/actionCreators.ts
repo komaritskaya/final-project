@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Dispatch } from 'redux';
 import {
   FETCH_SINGLE_POKEMON_REQUEST,
   FETCH_SINGLE_POKEMON_SUCCESS,
@@ -10,27 +11,33 @@ import {
   CATCH_POKEMON_SUCCESS,
   CATCH_POKEMON_FAILURE,
   SET_FILTER,
-  // ADD_SHOWN_POKEMONS,
   RESET_SHOWN_POKEMONS,
 } from './actionTypes';
-import { Path, SHOWN_POKEMONS_COUNT, Status } from '../const';
-import { FilterType } from '../types';
+import { Path, Status } from '../const';
+import {
+  RawPokemon,
+  UserPokemon,
+  Pokemon,
+  FilterType,
+  DataAction,
+  AppAction,
+} from '../types';
 
 const URL = 'http://localhost:3000';
 
-export const fetchSinglePokemonRequest = () => ({
+export const fetchSinglePokemonRequest = (): AppAction => ({
   type: FETCH_SINGLE_POKEMON_REQUEST,
 });
 
-export const fetchSinglePokemonSuccess = (currentPokemon) => ({
+export const fetchSinglePokemonSuccess = (currentPokemon: Pokemon): DataAction => ({
   type: FETCH_SINGLE_POKEMON_SUCCESS, payload: { currentPokemon },
 });
 
-export const fetchSinglePokemonFailure = (error) => ({
+export const fetchSinglePokemonFailure = (error: Error): AppAction => ({
   type: FETCH_SINGLE_POKEMON_FAILURE, payload: { error },
 });
 
-export const fetchSinglePokemon = (id) => (dispatch) => {
+export const fetchSinglePokemon = (id: string) => (dispatch: Dispatch<DataAction | AppAction>) => {
   dispatch(fetchSinglePokemonRequest());
   axios.get(`${URL}/${Path.POKEMONS}/${id}`).then((allResponse) => {
     axios.get(`${URL}/${Path.CAUGHT}/${id}`).then((caughtResponse) => {
@@ -53,19 +60,21 @@ export const fetchSinglePokemon = (id) => (dispatch) => {
   });
 };
 
-export const fetchPokemonsRequest = () => ({
+export const fetchPokemonsRequest = (): AppAction => ({
   type: FETCH_POKEMONS_REQUEST,
 });
 
-export const fetchPokemonsSuccess = (pokemons) => ({
+export const fetchPokemonsSuccess = (pokemons: Pokemon[]): DataAction => ({
   type: FETCH_POKEMONS_SUCCESS, payload: { pokemons },
 });
 
-export const fetchPokemonsFailure = (error) => ({
+export const fetchPokemonsFailure = (error: Error): AppAction => ({
   type: FETCH_POKEMONS_FAILURE, payload: { error },
 });
 
-export const fetchAllPokemons = (from, to) => (dispatch) => {
+export const fetchAllPokemons = (from: number, to: number) => (
+  dispatch: Dispatch<DataAction | AppAction>,
+) => {
   dispatch(fetchPokemonsRequest());
   const pokemonsRequest = axios.get(`${URL}/${Path.POKEMONS}?_start=${from}&_end=${to}`);
   const caughtPokemonsRequest = axios.get(`${URL}/${Path.CAUGHT}`);
@@ -74,8 +83,8 @@ export const fetchAllPokemons = (from, to) => (dispatch) => {
       const pokemonsResponse = responses[0].data;
       const caughtPokemonsResponse = responses[1].data;
 
-      const pokemons = pokemonsResponse.map((pokemon) => {
-        const matchingIndex = caughtPokemonsResponse.findIndex((caughtPokemon) => (
+      const pokemons = pokemonsResponse.map((pokemon: RawPokemon) => {
+        const matchingIndex = caughtPokemonsResponse.findIndex((caughtPokemon: UserPokemon) => (
           caughtPokemon.id === pokemon.id
         ));
 
@@ -101,17 +110,19 @@ export const fetchAllPokemons = (from, to) => (dispatch) => {
   });
 };
 
-export const fetchCaughtPokemons = (from, to) => (dispatch) => {
+export const fetchCaughtPokemons = (from: number, to: number) => (
+  dispatch: Dispatch<DataAction | AppAction>,
+) => {
   dispatch(fetchPokemonsRequest());
   axios.get(`${URL}/${Path.CAUGHT}?_start=${from}&_end=${to}`).then((caughtResponse) => {
     const caughtPokemons = caughtResponse.data;
-    const filter = caughtPokemons.map((item) => `id=${item.id}`).join('&');
+    const filter = caughtPokemons.map((item: UserPokemon) => `id=${item.id}`).join('&');
 
     axios.get(`${URL}/${Path.POKEMONS}?${filter}`).then((allResponse) => {
       const matchedPokemons = allResponse.data;
 
-      const pokemons = caughtPokemons.map((pokemon) => {
-        const matchingIndex = matchedPokemons.findIndex((matchedPokemon) => (
+      const pokemons = caughtPokemons.map((pokemon: UserPokemon) => {
+        const matchingIndex = matchedPokemons.findIndex((matchedPokemon: RawPokemon) => (
           matchedPokemon.id === pokemon.id
         ));
 
@@ -131,7 +142,9 @@ export const fetchCaughtPokemons = (from, to) => (dispatch) => {
   });
 };
 
-export const fetchPokemons = (filter, from, to) => (dispatch) => {
+export const fetchPokemons = (filter: FilterType, from: number, to: number) => (
+  dispatch: Dispatch<any>,
+) => {
   if (filter === FilterType.CAUGHT) {
     dispatch(fetchCaughtPokemons(from, to));
   } else {
@@ -139,19 +152,21 @@ export const fetchPokemons = (filter, from, to) => (dispatch) => {
   }
 };
 
-export const catchPokemonRequest = () => ({
+export const catchPokemonRequest = (): AppAction => ({
   type: CATCH_POKEMON_REQUEST,
 });
 
-export const catchPokemonSuccess = (pokemon) => ({
+export const catchPokemonSuccess = (pokemon: UserPokemon): DataAction => ({
   type: CATCH_POKEMON_SUCCESS, payload: { pokemon },
 });
 
-export const catchPokemonFailure = (error) => ({
+export const catchPokemonFailure = (error: Error): AppAction => ({
   type: CATCH_POKEMON_FAILURE, payload: { error },
 });
 
-export const catchPokemon = (pokemon) => (dispatch) => {
+export const catchPokemon = (pokemon: UserPokemon) => (
+  dispatch: Dispatch<DataAction | AppAction>,
+) => {
   dispatch(catchPokemonRequest());
   axios.post(`${URL}/${Path.CAUGHT}`, pokemon).then(() => {
     dispatch(catchPokemonSuccess(pokemon));
@@ -160,17 +175,18 @@ export const catchPokemon = (pokemon) => (dispatch) => {
   });
 };
 
-export const setFilter = (filter) => ({
+export const setFilter = (filter: FilterType): AppAction => ({
   type: SET_FILTER,
   payload: { filter },
 });
 
-export const resetShownPokemons = () => ({
+export const resetShownPokemons = (): DataAction => ({
   type: RESET_SHOWN_POKEMONS,
 });
 
-export const changeFilter = (filter) => (dispatch) => {
+export const changeFilter = (filter: FilterType) => (
+  dispatch: Dispatch<DataAction | AppAction>,
+) => {
   dispatch(resetShownPokemons());
   dispatch(setFilter(filter));
-  dispatch(fetchPokemons(filter, 0, SHOWN_POKEMONS_COUNT));
 };

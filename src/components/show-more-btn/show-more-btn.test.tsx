@@ -13,7 +13,7 @@ it('Should ShowMoreBtn component render correctly', () => {
       pokemons,
     },
     app: {
-      activeFilter: 'default',
+      filter: 'default',
     },
   });
 

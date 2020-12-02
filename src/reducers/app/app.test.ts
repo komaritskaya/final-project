@@ -17,24 +17,22 @@ import {
   FETCH_POKEMONS_SUCCESS,
   FETCH_POKEMONS_FAILURE,
 } from '../../actions/actionTypes';
+import pokemons from '../../mocks/pokemons';
+import { FilterType } from '../../types';
 
 const initialState = {
-  filter: null,
+  filter: FilterType.DEFAULT,
   isLoading: false,
   error: null,
 };
-
-it('Reducer without additional parameters should return initial state', () => {
-  expect(appReducer(initialState, { type: 'ERROR', payload: null })).toEqual(initialState);
-});
 
 it('Reducer should change filter to a given value', () => {
   expect(appReducer(initialState, {
     type: SET_FILTER,
     payload: {
-      filter: 'filter',
+      filter: FilterType.CAUGHT,
     },
-  })).toEqual({ ...initialState, filter: 'filter' });
+  })).toEqual({ ...initialState, filter: FilterType.CAUGHT });
 });
 
 it('Reducer should perform single pokemon request', () => {
@@ -65,26 +63,26 @@ it('Reducer should handle single pokemon request error', () => {
   expect(appReducer(initialState, {
     type: FETCH_SINGLE_POKEMON_FAILURE,
     payload: {
-      error: 'error',
+      error: new Error(),
     },
-  })).toEqual({ ...initialState, error: 'error' });
+  })).toEqual({ ...initialState, error: new Error() });
 });
 
 it('Reducer should handle pokemons request error', () => {
   expect(appReducer(initialState, {
     type: FETCH_POKEMONS_FAILURE,
     payload: {
-      error: 'error',
+      error: new Error(),
     },
-  })).toEqual({ ...initialState, error: 'error' });
+  })).toEqual({ ...initialState, error: new Error() });
 });
 
 describe('setFilter works correctly', () => {
   it('Action creator for changing filter returns correct action', () => {
-    expect(setFilter('filter')).toEqual({
+    expect(setFilter(FilterType.DEFAULT)).toEqual({
       type: SET_FILTER,
       payload: {
-        filter: 'filter',
+        filter: FilterType.DEFAULT,
       },
     });
   });
@@ -97,28 +95,23 @@ describe('fetchSinglePokemonRequest works correctly', () => {
     });
   });
 });
+
 describe('fetchSinglePokemonSuccess works correctly', () => {
   it('Action creator for handling single pokemon load success returns correct action', () => {
-    expect(fetchSinglePokemonSuccess({
-      id: 3,
-      date: new Date(2020, 0, 0),
-    })).toEqual({
+    expect(fetchSinglePokemonSuccess(pokemons[0])).toEqual({
       type: FETCH_SINGLE_POKEMON_SUCCESS,
       payload: {
-        currentPokemon: {
-          id: 3,
-          date: new Date(2020, 0, 0),
-        },
+        currentPokemon: pokemons[0],
       },
     });
   });
 });
 describe('fetchSinglePokemonFailure works correctly', () => {
   it('Action creator for handling single pokemon load failure returns correct action', () => {
-    expect(fetchSinglePokemonFailure('error')).toEqual({
+    expect(fetchSinglePokemonFailure(new Error())).toEqual({
       type: FETCH_SINGLE_POKEMON_FAILURE,
       payload: {
-        error: 'error',
+        error: new Error(),
       },
     });
   });
@@ -143,10 +136,10 @@ describe('fetchPokemonsSuccess works correctly', () => {
 });
 describe('fetchPokemonsFailure works correctly', () => {
   it('Action creator for handling pokemons load failure returns correct action', () => {
-    expect(fetchPokemonsFailure('error')).toEqual({
+    expect(fetchPokemonsFailure(new Error())).toEqual({
       type: FETCH_POKEMONS_FAILURE,
       payload: {
-        error: 'error',
+        error: new Error(),
       },
     });
   });

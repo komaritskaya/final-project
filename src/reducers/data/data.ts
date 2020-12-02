@@ -4,13 +4,14 @@ import {
   CATCH_POKEMON_SUCCESS,
   RESET_SHOWN_POKEMONS,
 } from '../../actions/actionTypes';
+import { DataAction } from '../../types';
 
 const initialState = {
   currentPokemon: null,
   pokemons: [],
 };
 
-export default function dataReducer(state = initialState, action) {
+export default function dataReducer(state = initialState, action: DataAction) {
   switch (action.type) {
     case FETCH_SINGLE_POKEMON_SUCCESS:
       const { currentPokemon } = action.payload;

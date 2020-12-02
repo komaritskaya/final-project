@@ -14,10 +14,6 @@ const initialState = {
   pokemons,
 };
 
-it('Reducer without additional parameters should return initial state', () => {
-  expect(dataReducer(initialState, { type: 'ERROR', payload: null })).toEqual(initialState);
-});
-
 it('Reducer should change pokemons list to a given value', () => {
   expect(dataReducer(initialState, {
     type: FETCH_POKEMONS_SUCCESS,
@@ -33,13 +29,13 @@ it('Reducer should modify a pokemon in pokemons list', () => {
     payload: {
       pokemon: {
         id: 3,
-        date: new Date(2020, 0, 0),
+        catchDate: new Date(2020, 0, 0),
       },
     },
   })).toEqual({
     ...initialState,
     pokemons: initialState.pokemons.map((p) => (
-      p.id === 3 ? { ...p, ...{ date: new Date(2020, 0, 0), isCaught: true } } : p)),
+      p.id === 3 ? { ...p, ...{ catchDate: new Date(2020, 0, 0), isCaught: true } } : p)),
   });
 });
 
@@ -58,13 +54,13 @@ describe('catchPokemonSuccess work correctly', () => {
   it('Action creator for changing filter returns correct action', () => {
     expect(catchPokemonSuccess({
       id: 3,
-      date: new Date(2020, 0, 0),
+      catchDate: new Date(2020, 0, 0),
     })).toEqual({
       type: CATCH_POKEMON_SUCCESS,
       payload: {
         pokemon: {
           id: 3,
-          date: new Date(2020, 0, 0),
+          catchDate: new Date(2020, 0, 0),
         },
       },
     });

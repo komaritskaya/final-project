@@ -8,9 +8,18 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-const MaterialCard = ({
+interface MaterialCardProps {
+  image: string;
+  header: string;
+  buttonText: string;
+  linkAddress: string;
+  buttonClickHandler: () => void;
+  isButtonDisabled: boolean;
+}
+
+const MaterialCard: React.FC<MaterialCardProps> = ({
   image, header, buttonText, linkAddress, buttonClickHandler, isButtonDisabled,
-}) => (
+}: MaterialCardProps) => (
   <Card>
     <Link
       style={{ textDecoration: 'none', color: 'inherit' }}

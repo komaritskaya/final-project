@@ -1,9 +1,9 @@
 export const SHOWN_POKEMONS_COUNT = 12;
 
-export const Filter = {
-  DEFAULT: 'default',
-  CAUGHT: 'caught',
-};
+// export const Filter = {
+//   DEFAULT: 'default',
+//   CAUGHT: 'caught',
+// };
 
 export const Path = {
   POKEMONS: 'pokemons',
