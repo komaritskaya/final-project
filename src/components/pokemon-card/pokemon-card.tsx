@@ -25,7 +25,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }: PokemonCardProps) 
       buttonText="catch"
       linkAddress={`/${pokemon.id}`}
       buttonClickHandler={() => onCatchButtonClick(pokemon.id)}
-      isButtonDisabled={pokemon.isCaught}
+      isButtonDisabled={pokemon.isCaught || isCatchPokemonLoading}
       isLoading={isCatchPokemonLoading && pokemonIdInProgress === pokemon.id}
       isError={error && pokemonIdInProgress === pokemon.id}
     />

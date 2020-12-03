@@ -38,6 +38,7 @@ const ShowMoreBtn: React.FC = () => {
       value="show more"
       clickHandler={() => onButtonClick()}
       isLoading={isFetchPokemonsLoading}
+      isDisabled={isFetchPokemonsLoading}
     />
   );
 };

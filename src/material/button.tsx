@@ -7,6 +7,7 @@ interface MaterialButtonProps {
   value: string;
   clickHandler: () => void;
   isLoading: boolean;
+  isDisabled: boolean;
 }
 
 const useStyles = makeStyles(() => ({
@@ -16,7 +17,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const MaterialButton: React.FC<MaterialButtonProps> = ({
-  value, clickHandler, isLoading,
+  value, clickHandler, isLoading, isDisabled,
 }: MaterialButtonProps) => {
   const classes = useStyles();
 
@@ -28,6 +29,7 @@ const MaterialButton: React.FC<MaterialButtonProps> = ({
       size="large"
       fullWidth
       onClick={clickHandler}
+      disabled={isDisabled}
     >
       {isLoading && <CircularProgress color="inherit" size={22} />}
       {!isLoading && value.toUpperCase()}
