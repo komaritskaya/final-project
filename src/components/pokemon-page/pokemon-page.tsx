@@ -19,7 +19,7 @@ const PokemonPage: React.FC<RouteComponentProps<{id: string}>> = ({
   const isFetchSinglePokemonLoading = useSelector(
     (state: State) => state.app.isFetchSinglePokemonLoading,
   );
-  const error = useSelector((state: State) => state.app.error);
+  const error = useSelector((state: State) => state.app.fetchSinglePokemonError);
 
   useEffect(() => {
     dispatch(fetchSinglePokemon(id));

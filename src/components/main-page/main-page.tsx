@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import MaterialContainer from '../../material/container';
 import MaterialProgress from '../../material/progress';
+import MaterialError from '../../material/error';
 import Navigation from '../navigation/navigation';
 import PokemonsList from '../pokemons-list/pokemons-list';
 import ShowMoreBtn from '../show-more-btn/show-more-btn';
@@ -15,6 +16,7 @@ const MainPage: React.FC = () => {
   const pokemons = useSelector((state: State) => state.data.pokemons);
   const activeFilter = useSelector((state: State) => state.app.filter);
   const isFetchPokemonsLoading = useSelector((state: State) => state.app.isFetchPokemonsLoading);
+  const fetchPokemonsError = useSelector((state: State) => state.app.fetchPokemonsError);
 
   useEffect(() => {
     dispatch(fetchPokemons(activeFilter, 0, SHOWN_POKEMONS_COUNT));
@@ -39,6 +41,7 @@ const MainPage: React.FC = () => {
     <MaterialContainer>
       <Navigation />
       {renderList()}
+      {fetchPokemonsError && <MaterialError />}
       <ShowMoreBtn />
     </MaterialContainer>
   );

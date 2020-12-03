@@ -31,7 +31,9 @@ const initialState = {
   isFetchPokemonsLoading: false,
   isFetchSinglePokemonLoading: false,
   isCatchPokemonLoading: false,
-  error: null,
+  fetchPokemonsError: null,
+  fetchSinglePokemonError: null,
+  catchPokemonError: null,
   pokemonIdInProgress: null,
 };
 
@@ -47,13 +49,17 @@ it('Reducer should change filter to a given value', () => {
 it('Reducer should perform single pokemon request', () => {
   expect(appReducer(initialState, {
     type: FETCH_SINGLE_POKEMON_REQUEST,
-  })).toEqual({ ...initialState, isFetchSinglePokemonLoading: true, error: null });
+  })).toEqual({
+    ...initialState,
+    isFetchSinglePokemonLoading: true,
+    fetchSinglePokemonError: null,
+  });
 });
 
 it('Reducer should perform pokemons request', () => {
   expect(appReducer(initialState, {
     type: FETCH_POKEMONS_REQUEST,
-  })).toEqual({ ...initialState, isFetchPokemonsLoading: true, error: null });
+  })).toEqual({ ...initialState, isFetchPokemonsLoading: true, fetchPokemonsError: null });
 });
 
 it('Reducer should perform catch pokemon request', () => {
@@ -63,7 +69,7 @@ it('Reducer should perform catch pokemon request', () => {
       id: 1,
     },
   })).toEqual({
-    ...initialState, isCatchPokemonLoading: true, error: null, pokemonIdInProgress: 1,
+    ...initialState, isCatchPokemonLoading: true, catchPokemonError: null, pokemonIdInProgress: 1,
   });
 });
 
@@ -92,7 +98,7 @@ it('Reducer should handle single pokemon request error', () => {
     payload: {
       error: new Error(),
     },
-  })).toEqual({ ...initialState, error: new Error() });
+  })).toEqual({ ...initialState, fetchSinglePokemonError: new Error() });
 });
 
 it('Reducer should handle pokemons request error', () => {
@@ -101,7 +107,7 @@ it('Reducer should handle pokemons request error', () => {
     payload: {
       error: new Error(),
     },
-  })).toEqual({ ...initialState, error: new Error() });
+  })).toEqual({ ...initialState, fetchPokemonsError: new Error() });
 });
 
 it('Reducer should handle catch pokemon failure', () => {
@@ -110,7 +116,7 @@ it('Reducer should handle catch pokemon failure', () => {
     payload: {
       error: new Error(),
     },
-  })).toEqual({ ...initialState, error: new Error() });
+  })).toEqual({ ...initialState, catchPokemonError: new Error() });
 });
 
 describe('setFilter works correctly', () => {

@@ -37,7 +37,9 @@ export interface State {
     isFetchSinglePokemonLoading: boolean;
     isFetchPokemonsLoading: boolean;
     isCatchPokemonLoading: boolean;
-    error: Error;
+    fetchSinglePokemonError: Error;
+    fetchPokemonsError: Error;
+    catchPokemonError: Error;
     pokemonIdInProgress: number;
   };
   data: {

@@ -16,11 +16,12 @@ const ShowMoreBtn: React.FC = () => {
   useEffect(() => {
     const path = activeFilter === FilterType.CAUGHT ? Path.CAUGHT : Path.POKEMONS;
     axios.get(`${URL}/${path}`).then((res) => {
-      if (res.data.length > pokemons.length) {
+      if (pokemons.length && res.data.length > pokemons.length) {
         setIsShown(true);
       } else {
         setIsShown(false);
       }
+      // eslint-disable-next-line no-console
     }).catch((err) => console.log(err));
   }, [activeFilter, pokemons]);
 
